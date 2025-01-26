@@ -1,0 +1,86 @@
+package data
+
+import "portfolio/types"
+
+var Projects = []types.Project{
+	{
+		ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		GithubURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		Title:       "React",
+		Description: "A JavaScript library for building user interfaces.",
+		TechStacks:  []string{"JavaScript", "React", "JSX", "Webpack"},
+		Stars:       210000,
+	},
+	{
+		ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		GithubURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		Title:       "Vue.js",
+		Description: "The Progressive JavaScript Framework.",
+		TechStacks:  []string{"JavaScript", "Vue", "Vuex", "Vite"},
+		Stars:       200000,
+	},
+	{
+		ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		GithubURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		Title:       "React",
+		Description: "A JavaScript library for building user interfaces.",
+		TechStacks:  []string{"JavaScript", "React", "JSX", "Webpack"},
+		Stars:       210000,
+	},
+	{
+		ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		GithubURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		Title:       "Vue.js",
+		Description: "The Progressive JavaScript Framework.",
+		TechStacks:  []string{"JavaScript", "Vue", "Vuex", "Vite"},
+		Stars:       200000,
+	},
+	{
+		ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		GithubURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		Title:       "React",
+		Description: "A JavaScript library for building user interfaces.",
+		TechStacks:  []string{"JavaScript", "React", "JSX", "Webpack"},
+		Stars:       210000,
+	},
+	{
+		ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		GithubURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		Title:       "Vue.js",
+		Description: "The Progressive JavaScript Framework.",
+		TechStacks:  []string{"JavaScript", "Vue", "Vuex", "Vite"},
+		Stars:       200000,
+	},
+	{
+		ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		GithubURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		Title:       "React",
+		Description: "A JavaScript library for building user interfaces.",
+		TechStacks:  []string{"JavaScript", "React", "JSX", "Webpack"},
+		Stars:       210000,
+	},
+	{
+		ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		GithubURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		Title:       "Vue.js",
+		Description: "The Progressive JavaScript Framework.",
+		TechStacks:  []string{"JavaScript", "Vue", "Vuex", "Vite"},
+		Stars:       200000,
+	},
+	{
+		ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		GithubURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		Title:       "React",
+		Description: "A JavaScript library for building user interfaces.",
+		TechStacks:  []string{"JavaScript", "React", "JSX", "Webpack"},
+		Stars:       210000,
+	},
+	{
+		ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		GithubURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+		Title:       "Vue.js",
+		Description: "The Progressive JavaScript Framework.",
+		TechStacks:  []string{"JavaScript", "Vue", "Vuex", "Vite"},
+		Stars:       200000,
+	},
+}

@@ -5,9 +5,12 @@ import (
 	"log"
 	"net/http"
 
+	"portfolio/cmd/web"
+	"portfolio/cmd/web/components"
+	"portfolio/types"
+
 	"github.com/a-h/templ"
 	"github.com/gorilla/mux"
-	"portfolio/cmd/web"
 )
 
 func (s *Server) RegisterRoutes() http.Handler {
@@ -16,7 +19,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 	// Apply CORS middleware
 	r.Use(s.corsMiddleware)
 
-	r.HandleFunc("/", s.HelloWorldHandler)
+	r.Handle("/", templ.Handler(web.Home()))
 
 	fileServer := http.FileServer(http.FS(web.Files))
 	r.PathPrefix("/assets/").Handler(fileServer)
@@ -25,6 +28,33 @@ func (s *Server) RegisterRoutes() http.Handler {
 		templ.Handler(web.HelloForm()).ServeHTTP(w, r)
 	})
 
+	r.HandleFunc("/projects/more", func(w http.ResponseWriter, r *http.Request) {
+		projects := []types.Project{
+			{
+				ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+				Title:       "React",
+				Description: "A JavaScript library for building user interfaces.",
+				TechStacks:  []string{"JavaScript", "React", "JSX", "Webpack"},
+				Stars:       210000,
+			},
+			{
+				ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
+				Title:       "Vue.js",
+				Description: "The Progressive JavaScript Framework.",
+				TechStacks:  []string{"JavaScript", "Vue", "Vuex", "Vite"},
+				Stars:       200000,
+			},
+		}
+
+		projectsHtml := components.ProjectListNoParent(projects)
+		projectsHtml.Render(r.Context(), w)
+	})
+
+	r.HandleFunc("/projects", func(w http.ResponseWriter, r *http.Request) {
+	
+
+		web.Projects(projects).Render(r.Context(), w)
+	})
 	r.HandleFunc("/hello", web.HelloWebHandler)
 
 	return r
