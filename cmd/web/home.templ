@@ -33,9 +33,6 @@ func getProjects() []types.Project {
 templ Home() {
 
     @Base() {
-        @components.Hero()
-        @components.About()
-        @components.Services()
-        @components.ProjectList(getProjects(), true)
+		@components.HomeComponent()
     }
 }

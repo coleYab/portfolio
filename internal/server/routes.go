@@ -2,62 +2,121 @@ package server
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
 	"portfolio/cmd/web"
 	"portfolio/cmd/web/components"
-	"portfolio/types"
+	"portfolio/internal/middleware"
+	"portfolio/internal/store"
+	"portfolio/internal/utils"
 
 	"github.com/a-h/templ"
 	"github.com/gorilla/mux"
 )
 
-func (s *Server) RegisterRoutes() http.Handler {
+func (s *Server) RegisterRoutes(st store.ProjectStore) http.Handler {
 	r := mux.NewRouter()
 
 	// Apply CORS middleware
 	r.Use(s.corsMiddleware)
+	r.Use(middleware.LoggerMiddleware)
 
 	r.Handle("/", templ.Handler(web.Home()))
 
 	fileServer := http.FileServer(http.FS(web.Files))
 	r.PathPrefix("/assets/").Handler(fileServer)
 
+	r.HandleFunc("/like", func(w http.ResponseWriter, r *http.Request) {
+		toast := components.ToastSuccess("Project liked")
+		toast.Render(r.Context(), w)
+	})
+
 	r.HandleFunc("/web", func(w http.ResponseWriter, r *http.Request) {
 		templ.Handler(web.HelloForm()).ServeHTTP(w, r)
 	})
 
 	r.HandleFunc("/projects/more", func(w http.ResponseWriter, r *http.Request) {
-		projects := []types.Project{
-			{
-				ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
-				Title:       "React",
-				Description: "A JavaScript library for building user interfaces.",
-				TechStacks:  []string{"JavaScript", "React", "JSX", "Webpack"},
-				Stars:       210000,
-			},
-			{
-				ImageURL:    "https://cdn.freelogovectors.net/wp-content/uploads/2023/02/react-logo-freelogovectors.net_.png",
-				Title:       "Vue.js",
-				Description: "The Progressive JavaScript Framework.",
-				TechStacks:  []string{"JavaScript", "Vue", "Vuex", "Vite"},
-				Stars:       200000,
-			},
-		}
-
-		projectsHtml := components.ProjectListNoParent(projects)
+		projectsHtml := components.ProjectListNoParent(st.GetProjects())
 		projectsHtml.Render(r.Context(), w)
 	})
 
-	r.HandleFunc("/projects", func(w http.ResponseWriter, r *http.Request) {
-	
+	r.HandleFunc("/mail", handleFormSubmission)
 
-		web.Projects(projects).Render(r.Context(), w)
+	r.HandleFunc("/contact", func(w http.ResponseWriter, r *http.Request) {
+		components.ContactUs().Render(r.Context(), w)
 	})
-	r.HandleFunc("/hello", web.HelloWebHandler)
+
+	r.HandleFunc("/repositories", func(w http.ResponseWriter, r *http.Request) {
+		components.ReposList(st.GetRepos(6)).Render(r.Context(), w)
+	})
+
+	r.HandleFunc("/repositories/more", func(w http.ResponseWriter, r *http.Request) {
+		components.RepoListNoParent(st.GetRepos(6)).Render(r.Context(), w)
+	})
+
+	r.HandleFunc("/projects", func(w http.ResponseWriter, r *http.Request) {
+		web.Projects(st.GetProjects()).Render(r.Context(), w)
+	})
+
+	r.HandleFunc("/home", func(w http.ResponseWriter, r *http.Request) {
+		components.HomeComponent().Render(r.Context(), w)
+	})
 
 	return r
+
+}
+
+func handleFormSubmission(w http.ResponseWriter, r *http.Request) {
+	// Parse the form data
+	err := r.ParseForm()
+	if err != nil {
+		components.ToastDanger("failed to parse the form email").Render(r.Context(), w)
+		return
+	}
+
+	// Extract form values
+	formData := FormData{
+		Name:    r.FormValue("name"),
+		Email:   r.FormValue("email"),
+		Message: r.FormValue("message"),
+	}
+
+	if len(formData.Message) > 200 {
+		components.ToastDanger("failed to send email messge to long").Render(r.Context(), w)
+		return
+	}
+
+	// Send the form data to FormSubmit
+	err = utils.SendToTGBot(formData.FormatPaylod())
+	if err != nil {
+		components.ToastDanger("failed to send email").Render(r.Context(), w)
+		return
+	}
+
+	// Respond to the client
+	components.ToastSuccess("email sent successfully").Render(r.Context(), w)
+}
+
+// FormData represents the structure of the form data
+type FormData struct {
+	Name    string `json:"name"`
+	Email   string `json:"email"`
+	Message string `json:"message"`
+}
+
+func (f *FormData) FormatPaylod() string {
+	// Use Markdown formatting for better readability
+	message := fmt.Sprintf(
+		"*New Message Received* 🚀\n\n"+
+			"*Name:* %s\n"+
+			"*Email:* `%s`\n"+
+			"*Message:*\n%s",
+		f.Name, f.Email, f.Message,
+	)
+
+	return message
 }
 
 // CORS middleware

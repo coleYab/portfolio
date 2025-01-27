@@ -2,23 +2,26 @@ package store
 
 import (
 	"portfolio/data"
+	"portfolio/internal/utils"
 	"portfolio/types"
 )
 
 type ProjectStore interface {
-	GetProjects(count int) []types.Project
+	GetProjects() []types.Project
+	GetRepos(count int) []types.Repository
+}
+
+func New() *Store {
+	return &Store{}
 }
 
 type Store struct{}
 
-func (s *Store) GetProjects(count int) {
-	finalProj := make([]types.Project, count)
-	if count <= len(data.Projects) {
-		return data.Projects[0 : count+1]
-	}
+func (s *Store) GetProjects() []types.Project {
+	return data.Projects
+}
 
-	idx := 0
-	for len(finalProj) < count {
-		
-	}
+func (s *Store) GetRepos(count int) []types.Repository {
+	rep, _ := utils.FetchRepositories("coleYab")
+	return rep[0:12]
 }

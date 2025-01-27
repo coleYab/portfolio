@@ -1,0 +1,78 @@
+package components;
+
+templ ContactUs() {
+<div class="bg-gray-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <!-- Left Side: Contact Information -->
+    <div class="space-y-6">
+      <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white">
+        Let's talk something <span class="text-blue-600">special</span>
+      </h1>
+      <p class="text-lg text-gray-600 dark:text-gray-300">
+        I seek to push the limits of creativity to create high-engaging, user-friendly, and memorable interactive experiences.
+      </p>
+      <div class="space-y-4">
+        <p class="text-gray-600 dark:text-gray-300">
+          <span class="font-semibold">Email:</span> yabume123@gmail.com
+        </p>
+        <p class="text-gray-600 dark:text-gray-300">
+          <span class="font-semibold">Phone:</span> +251968785657
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Side: Contact Form -->
+    <form 
+    hx-post="/mail" 
+    hx-target="#toast-container"
+    class="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg">
+      <div class="mb-5">
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Your email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="janedoe@gmail.com"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 blue-link"
+          required
+        />
+      </div>
+      <div class="mb-5">
+        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Your name
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Jane Doe"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          required
+        />
+      </div>
+      <div class="mb-5">
+        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Your message (less than 500 chars)
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          class="block p-2.5 w-full text-sm resize-none text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Leave a comment..."
+        ></textarea>
+      </div>
+      <div class="flex items-center justify-center">
+        <button
+          type="submit"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+}
