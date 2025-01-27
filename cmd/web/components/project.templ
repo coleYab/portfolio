@@ -3,42 +3,41 @@ package components
 import "portfolio/types"
 
 templ ProjectList(projects []types.Project, withbtn bool) {
-    <div id="project-list"
-        class="project-container mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
-        for _, project := range projects {
-            @ProjectCard(project)
-        }
-        if withbtn {
-        <button type="button"
-            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-36 md:w-64 md:h-16"
-            hx-get="/projects" hx-target="#container">See More</button>
-
-        
-        }
-    </div>
+<div id="project-list"
+    class="project-container mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
+    for _, project := range projects {
+    @ProjectCard(project)
+    }
+    if withbtn {
+    <button type="button"
+        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-36 md:w-64 md:h-16"
+        hx-get="/projects" hx-target="#container">See More</button>
+    }
+</div>
 }
 
 templ ProjectListNoParent(projects []types.Project) {
-    for _, project := range projects {
-        @ProjectCard(project)
-    }
+for _, project := range projects {
+@ProjectCard(project)
+}
 }
 
 templ RepoListNoParent(repos []types.Repository) {
-    for _, repo := range repos {
-        @RepositoryCard(repo)
-    }
+for _, repo := range repos {
+@RepositoryCard(repo)
+}
 }
 
 templ ReposList(repos []types.Repository) {
-    <h1 class="text-4xl w-screen text-center sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight"> My Featured Projects </h1>
-    <div id="repo-list"
-        class="project-container mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
+<h1 class="text-4xl w-screen text-center sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight"> Recent
+    Github Contributions</h1>
+<div id="repo-list"
+    class="project-container mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
     for _, repo := range repos {
-        @RepositoryCard(repo)
+    @RepositoryCard(repo)
     }
-    </div> 
-     <button type="button"
-            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-36 md:w-64 md:h-16"
-            hx-get="/repositories/more" hx-target="#repo-list" hx-swap="beforeend">See More</button>
+</div>
+<button type="button"
+    class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-36 md:w-64 md:h-16"
+    hx-get="/repositories/more" hx-target="#repo-list" hx-swap="beforeend">See More</button>
 }

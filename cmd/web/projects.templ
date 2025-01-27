@@ -9,11 +9,11 @@ templ Projects(projects []types.Project) {
 <div class="flex flex-col gap-8 items-center">
     <h1 class="text-4xl sm:text-5xl text-center w-screen font-bold text-gray-900 dark:text-white leading-tight"> My Featured Projects </h1>
     @components.ProjectList(projects, false)
+    // <button type="button"
+    //     class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-36 md:w-64 md:h-16"
+    //     hx-get="/projects/more" hx-target="#project-list" hx-swap="beforeend">Load More</button>
     <button type="button"
-        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-36 md:w-64 md:h-16"
-        hx-get="/projects/more" hx-target="#project-list" hx-swap="beforeend">Load More</button>
-    <button type="button"
-            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-36 md:w-64 md:h-16"
-            hx-get="/repositories" hx-swap="outerHTML">See Recent Github Activites</button>
+            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 md:h-16"
+            hx-get="/repositories" hx-swap="outerHTML">Recent Github Projects</button>
 </div>
 }

@@ -25,6 +25,7 @@ templ ContactUs() {
     <form 
     hx-post="/mail" 
     hx-target="#toast-container"
+    id="contact-form"
     class="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg">
       <div class="mb-5">
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -54,7 +55,7 @@ templ ContactUs() {
       </div>
       <div class="mb-5">
         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Your message (less than 500 chars)
+          Your message (less than 500 words)
         </label>
         <textarea
           id="message"

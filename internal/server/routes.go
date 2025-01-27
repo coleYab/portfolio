@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	"portfolio/cmd/web"
 	"portfolio/cmd/web/components"
@@ -72,6 +73,7 @@ func handleFormSubmission(w http.ResponseWriter, r *http.Request) {
 	// Parse the form data
 	err := r.ParseForm()
 	if err != nil {
+		w.WriteHeader(http.StatusBadGateway)
 		components.ToastDanger("failed to parse the form email").Render(r.Context(), w)
 		return
 	}
@@ -83,8 +85,8 @@ func handleFormSubmission(w http.ResponseWriter, r *http.Request) {
 		Message: r.FormValue("message"),
 	}
 
-	if len(formData.Message) > 200 {
-		components.ToastDanger("failed to send email messge to long").Render(r.Context(), w)
+	if len(strings.Split(formData.Message, " ")) > 500 {
+		components.ToastDanger("failed to send email messge too long it has to be less than 500").Render(r.Context(), w)
 		return
 	}
 
