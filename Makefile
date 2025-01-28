@@ -3,7 +3,7 @@
 # Build the application
 all: build test
 templ-install:
-	@if ! command -v templ > /dev/null; then \
+	if ! command -v templ > /dev/null; then \
 		read -p "Go's 'templ' is not installed on your machine. Do you want to install it? [Y/n] " choice; \
 		if [ "$$choice" != "n" ] && [ "$$choice" != "N" ]; then \
 			go install github.com/a-h/templ/cmd/templ@latest; \
@@ -17,15 +17,13 @@ templ-install:
 		fi; \
 	fi
 tailwind-install:
-	@if [ ! -f tailwindcss ]; then curl -sL https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 -o tailwindcss; fi
-
-	@chmod +x tailwindcss
+	npm install
 
 build: tailwind-install templ-install
 	@echo "Building..."
-	@templ generate
-	@tailwindcss -i cmd/web/styles/input.css -o cmd/web/assets/css/output.css
-	@go build -o main cmd/api/main.go
+	templ generate
+	npx @tailwindcss/cli -i cmd/web/styles/input.css -o cmd/web/assets/css/output.css
+	go build -o main cmd/api/main.go
 
 # Run the application
 run: build
