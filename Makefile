@@ -28,8 +28,8 @@ build: tailwind-install templ-install
 	@go build -o main cmd/api/main.go
 
 # Run the application
-run:
-	@go run cmd/api/main.go
+run: build
+	@go ./main
 
 # Test the application
 test:
@@ -58,4 +58,4 @@ watch:
             fi; \
         fi
 
-.PHONY: all build run test clean watch tailwind-install templ-install
+.PHONY: all build test clean watch tailwind-install templ-install
