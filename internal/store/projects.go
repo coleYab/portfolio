@@ -22,6 +22,10 @@ func (s *Store) GetProjects() []types.Project {
 }
 
 func (s *Store) GetRepos(count int) []types.Repository {
-	rep, _ := utils.FetchRepositories("coleYab")
+	rep, err := utils.FetchRepositories("coleYab")
+    if err != nil {
+        return []types.Repository{}
+    }
+
 	return rep[0:12]
 }

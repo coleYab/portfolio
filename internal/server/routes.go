@@ -50,7 +50,7 @@ func (s *Server) RegisterRoutes(st store.ProjectStore) http.Handler {
 	})
 
 	r.HandleFunc("/repositories", func(w http.ResponseWriter, r *http.Request) {
-		components.ReposList(st.GetRepos(6)).Render(r.Context(), w)
+		components.RepoListNoParent(st.GetRepos(6)).Render(r.Context(), w)
 	})
 
 	r.HandleFunc("/repositories/more", func(w http.ResponseWriter, r *http.Request) {

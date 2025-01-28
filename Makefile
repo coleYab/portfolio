@@ -27,7 +27,7 @@ build: tailwind-install templ-install
 
 # Run the application
 run: build
-	@go ./main
+	@./main
 
 # Test the application
 test:
